@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>首页</title>
+    <link href="../css/bg.css" rel="stylesheet"/>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="col-sm-12 bg">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/user/index">starting with null</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                data-whatever="@mdo">隐藏入口
+                        </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <form action="/user/admin" method="post">
+                                        <h4>高级会员专区<small>普通会员禁止入内</small></h4>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="username" class="control-label">用户名</label>
+                                                <input name="email" type="text" class="form-control" id="username">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password" class="control-label">密码</label>
+                                                <input name="password" type="password" class="form-control" id="password">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="index">首页</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">电影 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="listMovie">播放列表</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="AddMovies">增加可观看电影或接口</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left" action="/user/seach" method="post">
+                    <div class="form-group">
+                        <input name="seachName" type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="contact.html">联系站长</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">我的 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user/sendCollection">收藏</a></li>
+                            <li><a href="/user/sendHistory">历史</a></li>
+                            <li><a href="/user/Personal">个人中心</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/user/deleteSession">安全退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-8">
+        <h4>如果您喜欢本站，请收藏至书签，以防走丢，谢谢</h4>
+        <h6>本站所有内容来源于互联网，若有侵权，<small>请联系管理员删除</small></h6>
+    </div>
+    <div class="col-sm-1"></div>
+    <div id="carousel-example-generic" class="carousel slide col-sm-7" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="../img/1.jpg" alt="...">
+                <div class="carousel-caption">
+                    <h3>...</h3>
+                    <p>...</p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="../img/2.jpg" alt="...">
+                <div class="carousel-caption">
+                    <h3>...</h3>
+                    <p>...</p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="../img/3.jpg" alt="...">
+                <div class="carousel-caption">
+                    <h3>...</h3>
+                    <p>...</p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="../img/4.jpg" alt="...">
+                <div class="carousel-caption">
+                    <h3>...</h3>
+                    <p>...</p>
+                </div>
+            </div>
+            ...
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control col-sm-2" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control col-sm-10" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="col-sm-4">
+        <h2>解压小游戏<small>喂喂小仓鼠</small></h2>
+        <object type="application/x-shockwave-flash" style="outline:none; opacity: 0.7"
+                data="http://cdn.abowman.com/widgets/hamster/hamster.swf?" width="280" height="215">
+            <param name="movie" value="http://cdn.abowman.com/widgets/hamster/hamster.swf?"></param>
+            <param name="AllowScriptAccess" value="always"></param>
+            <param name="wmode" value="opaque"></param>
+        </object>
+        <h2>烧脑小游戏<small>圈小猫</small></h2>
+        <article class="article-content" style="opacity: 0.7">
+
+            <script src="https://down.52pojie.cn/.fancyindex/js/phaser.min.js"></script>
+            <script src="https://down.52pojie.cn/.fancyindex/js/catch-the-cat.js"></script>
+            <div id="catch-the-cat">
+                <canvas width="20" height="215"
+                        style="image-rendering: pixelated; height:50.8px;"></canvas>
+            </div>
+            <script>
+                window.game = new CatchTheCatGame({
+                    w: 7,
+                    h: 7,
+                    r: 11,
+                    backgroundColor: 0xeeeeee,
+                    parent: 'catch-the-cat',
+                    statusBarAlign: 'center',
+                    credit: 'StartingWithNull'
+                });
+            </script>
+        </article>
+    </div>
+    <!--推荐内容   foreach-->
+    <div class="media col-sm-10" th:each="movie :${movieList}">
+        <div class="col-sm-1"></div>
+        <div class="media-left">
+            <img class="media-object" th:src="${movie.movieImg}" width="180px" alt="...">
+            <form action="/user/display" method="post" style="display: inline-block">
+                <input name="movieName" type="text" hidden th:value="${movie.movieName}">
+                <input name="url" type="text" value="url" hidden th:value="${movie.movieUrl}">
+                <input name="page" type="text" hidden th:value="${page}">
+                <button type="submit" class="btn btn-primary" role="button">播放</button>
+            </form>
+        </div>
+        <div class="media-body">
+            <h1 class="media-heading" th:text="${movie.movieName}">movieName</h1>
+        </div>
+        <div class="media-body">
+            <h3 class="media-heading" th:text="${movie.movieInfo}">movieInfo</h3>
+        </div>
+    </div>
+
+    <!--分页-->
+    <div class="col-sm-5"></div>
+    <nav aria-label="Page navigation" class="col-sm-6">
+        <ul class="pagination" style="display: inline-block">
+            <li>
+                <a th:href="@{'/user/index?page='+${page-1}}"
+                   aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li>
+                <span style="display: inline-block" th:text="${page}">当前所在页</span>&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;<span style="display: inline-block" th:text="${size}">总页数</span>
+            </li>
+            <li th:if="@{page lt size}">
+                <a th:href="@{'/user/index?page='+${page+1}}"
+                   aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="../js/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="../js/bootstrap.min.js"></script>
+</div>
+</body>
+</html>

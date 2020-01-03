@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bugs.mapper.UserMapper">
+    <resultMap id="userMap" type="com.bugs.entity.User">
+        <id column="email" property="email"/>
+        <result column="user_id" property="userId"/>
+    </resultMap>
+    <!--
+        id：唯一标识
+        type：查询的实体类
+        property:实体类的名称
+        column:表内名称
+        -->
+    <select id="sendAll" resultMap="userMap">
+        select * from users;
+    </select>
+    <select id="send" resultMap="userMap">
+        select * from users where email=#{email} and password=#{password} and permissions=10
+    </select>
+
+    <select id="selectByEmail" resultType="user" parameterType="String">
+        select user_id as userId, email, username,password, permissions from users where email= #{email};
+    </select>
+    <select id="selectByPassword" resultType="user">
+        select user_id as userId, email, username,password, permissions from users where password= #{password}
+    </select>
+
+    <insert id="insertUser">
+        insert into users(user_ID,email,username,password,permissions) values(#{userId},#{email},#{username},#{password},#{permissions});
+    </insert>
+
+    <update id="updatePasswordByEmail">
+        update users set password=#{newPassword} where password=#{oldPassword} and email=#{email}
+    </update>
+
+    <!--分页查询用户-->
+    <select id="sendByPage" parameterType="INT" resultMap="userMap">
+        select * from users limit #{startNum},20
+    </select>
+
+    <!--分页查询管理员-->
+    <select id="sendAdminByPage" parameterType="INT" resultMap="userMap">
+        select * from users where permissions>=5 limit #{startNum},20
+    </select>
+    <select id="selectPasswordByEmail" parameterType="String" resultType="String">
+        select password from users where email=#{email}
+    </select>
+    <update id="updateUser">
+        update users set email=#{email}, username=#{username},password=#{password},permissions=#{permissions} where email=#{oldEmail}
+    </update>
+
+    <delete id="deleteUser" parameterType="String">
+        delete from users where email=#{email}
+    </delete>
+
+    <update id="updateAdmin">
+        update users set username=#{username},password=#{password},permissions=#{permissions} where email=#{email}
+    </update>
+
+    <insert id="insertAdmin">
+        insert into users values(#{userId},#{email},#{username},#{password},#{permissions})
+    </insert>
+</mapper>

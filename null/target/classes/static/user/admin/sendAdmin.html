@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>管理员管理</title>
+    <link rel="stylesheet" href="../../css/bg.css"/>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<h3>用户表<small><a href="/user/admin/sendUsers">点此进入</a> </small></h3>
+<h3>资源表<small><a href="/user/admin/sendResources">点此进入</a></small></h3>
+<h3>管理员列表<small><a href="/user/admin/sendAdmins">点此进入</a></small></h3>
+<a href="/user/index">返回首页</a>
+<div role="tabpanel" class="tab-pane" id="admin">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">管理员表</div>
+        <form class="navbar-form navbar-left">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <a th:align="@{right}" th:href="@{'/user/admin/insertAdmin?adminPage='+${adminPage}}">添加管理员</a>
+        <!-- Table -->
+        <table class="table">
+            <tr>
+                <td>用户名</td>
+                <td>密码</td>
+                <td>permissions</td>
+                <td>操作</td>
+            </tr>
+            <tr th:each="admin:${admins}">
+                <form action="/user/admin/updateAdmin" method="post">
+                    <input type="hidden" name="email" th:value="${admin.email}">
+                    <input type="text" name="username"
+                           th:value="${admin.username}" hidden>
+                    <input type="text" name="password"
+                           th:value="${admin.password}" hidden>
+                    <input type="text" name="permissions"
+                           th:value="${admin.permissions}" hidden>
+                    <input type="hidden" name="adminPage" th:value="${adminPage}"/>
+                    <td th:text="${admin.username}"></td>
+                    <td th:text="${admin.password}"></td>
+                    <td th:text="${admin.permissions}"></td>
+                    <td>
+                        <input type="submit" value="修改"/>
+                        <a th:href="@{'/user/admin/deleteAdmin?email='+${admin.email}+'&adminPage='+${adminPage}}">删除</a>
+                    </td>
+                </form>
+            </tr>
+        </table>
+    </div>
+    <!--分页-->
+    <div class="col-sm-5"></div>
+    <nav aria-label="Page navigation" class="col-sm-6">
+        <ul class="pagination">
+            <li>
+                <a href="/user/admin/sendAdmins?adminPage=" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li>
+                <form action="/user/admin/sendAdmin" method="post" class="navbar-form navbar-left"
+                      role="search">
+                    <div class="form-group">
+                        <input name="adminPage" type="text" class="form-control"
+                               th:placeholder="${adminPage}">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </li>
+            <li>
+                <a href="/user/admin/sendAdmins?adminPage=" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

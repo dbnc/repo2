@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bugs.mapper.UserInfoMapper">
+    <resultMap id="userInfoMap" type="com.bugs.entity.UserInfo">
+        <id column="user_email" property="email"/>
+        <result column="movie_url" property="movieUrl"/>
+        <result column="userInfo_code" property="code"/>
+    </resultMap>
+    <!--历史表的操作-->
+    <insert id="insertUrlToHistory" >
+        insert into userinfo values(#{email},#{url},1)
+    </insert>
+    <delete id="deleteUrlToHistory">
+        delete from userinfo where user_email=#{email} and movie_url= #{url} and userinfo_code=1
+    </delete>
+    <select id="sendHistory" resultMap="userInfoMap">
+        select * from userinfo where user_email=#{email} and movie_url=#{url} and userinfo_code= 1
+    </select>
+    <select id="sendHistoryList" resultMap="userInfoMap">
+        select * from userinfo where user_email=#{email} and userinfo_code=1 limit #{startNum},24
+    </select>
+    <!--收藏表的操作-->
+    <insert id="insertUrlToCollection" >
+        insert into userinfo values(#{email},#{url},2)
+    </insert>
+    <delete id="deleteUrlToCollection">
+        delete from userinfo where user_email=#{email} and movie_url= #{url} and userinfo_code=2
+    </delete>
+    <select id="sendCollection"  resultMap="userInfoMap">
+        select * from userinfo where user_email=#{email} and movie_url=#{url} and userinfo_code=2
+    </select>
+    <select id="sendCollectionList" resultMap="userInfoMap">
+        select * from userinfo  where user_email=#{email} and userinfo_code=2 limit #{startNum},24
+    </select>
+</mapper>
